@@ -1,18 +1,34 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+# Ignore build output directories
+/target/
+/out/
 
-# Other files and folders
-.settings/
+# Ignore IntelliJ IDEA-specific files
+/.idea/
+/*.iml
+*.ipr
+*.iws
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+# Ignore logs and temporary files
+/logs/
+/*.log
+*.swp
+*.swo
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore compiled class files
+*.class
+*.jar
+*.war
+*.ear
+
+# Ignore dependency caching (optional)
+/.mvn/
+/.m2/repository/
+
+# Ignore environment variables & secrets (if any)
+.env
+*.key
+*.pem
