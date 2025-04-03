@@ -66,21 +66,6 @@ public class EmployeePensionSystem {
         LocalDate quarterStart = LocalDate.of(year,startMonth,1);
         LocalDate quarterEnd = LocalDate.of(year,endMonth,endMonth.length(Year.of(year).isLeap()));
 
-//        List<Employee> enrolls = new ArrayList<>();
-//        for(Employee e : employees){
-//            if(e.getPensionPlan() == null){
-//                LocalDate eligibilityDate = e.getEmploymentDate().plusYears(3);
-//                System.out.print( e.getFirstName() + " "+ eligibilityDate);
-//                if(eligibilityDate.isEqual(quarterStart)||
-//                        ( eligibilityDate.isAfter(quarterStart) &&
-//                        eligibilityDate.isBefore(quarterEnd) )||
-//                        eligibilityDate.isEqual(quarterEnd)){
-//                    System.out.println(" Eligible");
-//                    enrolls.add(e);
-//                }
-//            }
-//        }
-
         List<Employee> enrolls= employees.stream()
                 .filter(emp -> emp.getPensionPlan()==null)
                 .filter(emp -> {
