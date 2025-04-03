@@ -10,9 +10,11 @@ name: lab1b ci
 
 on:
   push:
-    branches: ["lab1b"]
+    branches: 
+    - lab1b
   pull_request:
-    branches: ["lab1b"]
+    branches: 
+    - lab1b
 
 jobs:
   build:
