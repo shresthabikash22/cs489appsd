@@ -102,7 +102,7 @@ public class EmployeePensionSystem {
                 new Employee(1005L,"Yosef","Tesfalem",LocalDate.of(2022,10,31),100000.00,null)
         );
 
-//        printEmployeeList(employees);
-        listPotentialPensionEnrolees(employees);
+        printEmployeeList(employees);
+//        listPotentialPensionEnrolees(employees);
     }
 }
