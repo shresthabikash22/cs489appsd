@@ -16,6 +16,10 @@ on:
     branches:
       - lab1b
 
+permissions:
+  contents: read
+  security-events: write
+
 jobs:
   build:
 
