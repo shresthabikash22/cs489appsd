@@ -44,7 +44,6 @@ public class EmployeePensionSystem {
         LocalDate today = LocalDate.now();
         int year = today.getYear();
         Month startMonth, endMonth;
-
         switch ((today.getMonthValue()-1)/3){
             case 0 :
                 startMonth= Month.APRIL;
@@ -67,18 +66,32 @@ public class EmployeePensionSystem {
         LocalDate quarterStart = LocalDate.of(year,startMonth,1);
         LocalDate quarterEnd = LocalDate.of(year,endMonth,endMonth.length(Year.of(year).isLeap()));
 
+//        List<Employee> enrolls = new ArrayList<>();
+//        for(Employee e : employees){
+//            if(e.getPensionPlan() == null){
+//                LocalDate eligibilityDate = e.getEmploymentDate().plusYears(3);
+//                System.out.print( e.getFirstName() + " "+ eligibilityDate);
+//                if(eligibilityDate.isEqual(quarterStart)||
+//                        ( eligibilityDate.isAfter(quarterStart) &&
+//                        eligibilityDate.isBefore(quarterEnd) )||
+//                        eligibilityDate.isEqual(quarterEnd)){
+//                    System.out.println(" Eligible");
+//                    enrolls.add(e);
+//                }
+//            }
+//        }
+
         List<Employee> enrolls= employees.stream()
                 .filter(emp -> emp.getPensionPlan()==null)
                 .filter(emp -> {
                     LocalDate eligibilityDate = emp.getEmploymentDate().plusYears(3);
-
-                    return eligibilityDate.isBefore(today) || eligibilityDate.isEqual(today) ||
-                          (eligibilityDate.isAfter(today) &&
-                        (eligibilityDate.compareTo(quarterStart)>=0 ||
-                        eligibilityDate.compareTo(quarterEnd)<=0)) ;
+                    return
+                        eligibilityDate.isEqual(quarterStart)||eligibilityDate.isEqual(quarterEnd) ||
+                                (eligibilityDate.isAfter(quarterStart) &&
+                                        eligibilityDate.isBefore(quarterEnd)) ;
                 })
                 .sorted(Comparator.comparing(Employee::getEmploymentDate).reversed())
-                .collect(Collectors.toList());
+                .toList();
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
@@ -87,18 +100,19 @@ public class EmployeePensionSystem {
 
         try {
             String jsonOutput = objectMapper.writeValueAsString(enrolls);
+            System.out.println("Next Quarter Pension Enrolees ( In JSON Format):");
             System.out.println(jsonOutput);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
     public static void main(String[] args) {
         List<Employee> employees = List.of(
                 new Employee(1000L,"Daniel","Agar", LocalDate.of(2018,1,17),105945.50,new PensionPlan("EX1089",LocalDate.of(2018,01,17),100.00)),
+                new Employee(1002L, "Bernard", "Shaw", LocalDate.of(2022, 9, 3), 197750.00,null ),
                 new Employee(1001L,"Carly","Agar",LocalDate.of(2014,5,16),842000.75,new PensionPlan("SM2307",LocalDate.of(2019,11,04),1555.50)),
-                new Employee(1002L, "Bernard", "Shaw", LocalDate.of(2018, 10, 3), 197750.00,null ),
-                new Employee(1003L, "Wesley", "Schneider", LocalDate.of(2018, 11, 2), 74500.00,null),
+                new Employee(1003L, "Wesley", "Schneider", LocalDate.of(2022, 7, 21), 74500.00,null),
                 new Employee(1004L,"Anna","Wiltord",LocalDate.of(2022,6,15),85750.00,null),
                 new Employee(1005L,"Yosef","Tesfalem",LocalDate.of(2022,10,31),100000.00,null)
         );
