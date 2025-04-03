@@ -103,6 +103,6 @@ public class EmployeePensionSystem {
         );
 
         printEmployeeList(employees);
-//        listPotentialPensionEnrolees(employees);
+        listPotentialPensionEnrolees(employees);
     }
 }
