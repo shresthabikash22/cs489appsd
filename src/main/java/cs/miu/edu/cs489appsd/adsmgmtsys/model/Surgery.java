@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @NoArgsConstructor
@@ -12,13 +13,13 @@ import java.util.List;
 @Data
 public class Surgery {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @Column(nullable = false)
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false, unique = true)
     private Address address;
 
@@ -26,5 +27,5 @@ public class Surgery {
     private String phoneNumber;
 
     @OneToMany(mappedBy = "surgery")
-    private List<Appointment> appointments;
+    private List<Appointment> appointments = new ArrayList<>();
 }

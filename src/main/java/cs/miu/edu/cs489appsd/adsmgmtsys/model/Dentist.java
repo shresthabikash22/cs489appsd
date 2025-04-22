@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.List;
 @Data
 public class Dentist {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -35,6 +36,6 @@ public class Dentist {
     private User user;
 
     @OneToMany(mappedBy = "dentist")
-    private List<Appointment> appointments;
+    private List<Appointment> appointments = new ArrayList<>();
 
 }

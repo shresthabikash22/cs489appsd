@@ -12,22 +12,22 @@ import java.time.LocalDateTime;
 @Data
 public class Appointment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @Column(nullable = false)
     private LocalDateTime appointmentDate;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id", nullable=false)
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "dentist_id", nullable = false)
+    @JoinColumn(name = "dentist_id")
     private Dentist dentist;
 
     @ManyToOne
-    @JoinColumn(name = "surgery_id", nullable = false)
+    @JoinColumn(name = "surgery_id")
     private Surgery surgery;
 
     @Column(nullable = false)

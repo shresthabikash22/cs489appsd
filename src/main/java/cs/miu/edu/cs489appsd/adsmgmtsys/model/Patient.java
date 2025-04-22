@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 public class Patient {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -38,11 +38,11 @@ public class Patient {
     @JoinColumn(name = "user_id", nullable = false,unique = true)
     private User user;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="address_id", nullable = false)
     private Address address;
 
     @OneToMany(mappedBy = "patient")
-    private List<Appointment> appointments;
+    private List<Appointment> appointments = new ArrayList<>();
 
 }
